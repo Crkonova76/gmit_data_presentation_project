@@ -1,80 +1,87 @@
 import mysql.connector
+import dbConfig as cfg
+
 
 class KidsDAO:
-    db=""
+    db = ""
+
     def __init__(self):
-        self.db=mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="competition"
+        self.db = mysql.connector.connect(
+            host=cfg.mysql['host'],
+            user=cfg.mysql['user'],
+            password=cfg.mysql['password'],
+            database=cfg.mysql['database']
         )
 
-    def create(self,values):
-        cursor=self.db.cursor()
-        sql="insert into kids (name, surname,team,emergencyContactName,phoneNumber) values (%s,%s,%s,%s,%s)"
-        cursor.execute(sql,values)
+    def create(self, kid):
+        cursor = self.db.cursor()
+        sql = "insert into kids (name, surname,team,emergencyContactName,phoneNumber) values (%s,%s,%s,%s,%s)"
+        values = [
+            kid["name"],
+            kid["surname"],
+            kid["team"],
+            kid["emergencyContactName"],
+            kid["phoneNumber"]
+        ]
+
+        cursor.execute(sql, values)
 
         self.db.commit()
-        return cursor .lastrowid
+        return cursor.lastrowid
 
     def getAll(self):
-        cursor=self.db.cursor()
-        sql="select * from kids"
+        cursor = self.db.cursor()
+        sql = "select * from kids"
         cursor.execute(sql)
-        result=cursor.fetchall()
-        return result
+        results = cursor.fetchall()
+        returnArray = []
+        #print(results)
+        for result in results:
+            resultAsDict= self.convertToDict(result)
+            returnArray.append(resultAsDict)
+        return returnArray
 
-    def findByID(self,id):
-        cursor=self.db.cursor()
-        sql="select * from kids where registration = %s"
-        values=(id,)
+    def findByID(self, registration):
+        cursor = self.db.cursor()
+        sql = "select * from kids where registration = %s"
+        values = [registration]
 
-        cursor.execute(sql,values)
-        result=cursor.fetchone()
-        return result
+        cursor.execute(sql, values)
+        result = cursor.fetchone()
+        return self.convertToDict(result)
 
-    def update(self,values):
-        cursor=self.db.cursor()
-        sql="update kids set name=%s, surname=%s,team=%s,emergencyContactName=%s,phoneNumber=%s"
+    def update(self, kid):
+       
+        cursor = self.db.cursor()
+        sql = "update kids set name=%s, surname=%s,team=%s,emergencyContactName=%s,phoneNumber=%s"
+        values = [
+            kid["name"],
+            kid["surname"],
+            kid["team"],
+            kid["emergencyContactName"],
+            kid["phoneNumber"]
+        ]
         cursor.execute(sql,values)
         self.db.commit()
+        return kid
 
-    def delete(self,id):
-        cursor=self.db.cursor()
-        sql="delete from kids where registration = %s"
-        values=(id,)
-        cursor.execute(sql,values)
+    def delete(self, registration):
+        cursor = self.db.cursor()
+        sql = "delete from kids where registration = %s"
+        values = [registration]
+        cursor.execute(sql, values)
+        return{}
+        #self.db.commit()
+        #print("delete completed")
 
-        self.db.commit()
-        print("delete completed")
+    def convertToDict(self,result):
+        colnames=['registration','name','surname','team','emergencyContactName','phoneNumber']
+        kid = {}
 
-kidsDAo=KidsDAO
+        if result:
+            for i,colName in enumerate(colnames):
+                value=result[i]
+                kid[colName]=value
+        return kid
 
-#cursor=db.cursor()
-#cursor.execute("CREATE DATABASE competition")
-
-#cursor=db.cursor()
-#sql="CREATE TABLE kids (registration INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR (30),surname VARCHAR(30),team VARCHAR(30),emergencyContactName VARCHAR (30),phoneNumber INT)"
-#cursor.execute(sql)
-
-#Create
-#cursor=db.cursor()
-#sql="insert into kids (name, surname,team,emergencyContactName,phoneNumber) values (%s,%s,%s,%s,%s)"
-#values=("Oliver","Crkon","Limerick","Michal", "0872736491")
-#cursor.execute(sql,values)
-##db.commit()
-#print(cursor.lastrowid)
-
-#update phone number
-#cursor=db.cursor()
-#sql="update kids set phoneNumber=%s where registration=%s "
-#values=("0872736491",1)
-#cursor.execute(sql,values)
-
-#delete competitor
-#cursor=db.cursor()
-#sql="delete from kids  where registration=%s "
-#values=(2,)
-#cursor.execute(sql,values)
-#db.commit()
+kidsDAO = KidsDAO()
