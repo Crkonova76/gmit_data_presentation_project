@@ -50,16 +50,16 @@ class KidsDAO:
         result = cursor.fetchone()
         return self.convertToDict(result)
 
-    def update(self, kid):
-       
+    def update(self, kid):       
         cursor = self.db.cursor()
-        sql = "update kids set name=%s, surname=%s,team=%s,emergencyContactName=%s,phoneNumber=%s"
-        values = [
+        sql = "update kids set name=%s,surname=%s,team=%s,emergencyContactName=%s,phoneNumber=%s where registration = %s"
+        values = [            
             kid["name"],
             kid["surname"],
             kid["team"],
             kid["emergencyContactName"],
-            kid["phoneNumber"]
+            kid["phoneNumber"],
+            kid["registration"]
         ]
         cursor.execute(sql,values)
         self.db.commit()
