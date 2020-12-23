@@ -85,3 +85,67 @@ class KidsDAO:
         return kid
 
 kidsDAO = KidsDAO()
+
+class AdminsDAO:
+    db = ""
+
+    def __init__(self):
+        self.db = mysql.connector.connect(
+            host=cfg.mysql['host'],
+            user=cfg.mysql['user'],
+            password=cfg.mysql['password'],
+            database=cfg.mysql['database']
+        )
+
+    def createAdmin(self, admin):
+        cursor = self.db.cursor()
+        sql = "insert into admins (UserName, Password) values (%s,%s)"
+        values = [
+            admin["UserName"],
+            admin["Password"]
+        ]
+
+        cursor.execute(sql, values)
+
+        self.db.commit()
+        return cursor.lastrowid
+
+    def deleteAdmin(self, id):
+        cursor = self.db.cursor()
+        sql = "delete from admins where id = %s"
+        values = [id]
+        cursor.execute(sql, values)
+        return{}
+        
+        
+    def deleteAll(self):
+        cursor = self.db.cursor()
+        sql = "delete from admins where id != 1"       
+        cursor.execute(sql)
+        return{}
+
+
+    def getAllAdmins(self):
+        cursor = self.db.cursor()
+        sql = "select * from admins"
+        cursor.execute(sql)
+        results = cursor.fetchall()
+        returnArray = []
+        #print(results)
+        for result in results:
+            resultAsDict= self.convertToDict(result)
+            returnArray.append(resultAsDict)
+        return returnArray
+
+    def convertToDict(self,result):
+        colnames=['id','UserName','Password']
+        admin = {}
+
+        if result:
+            for i,colName in enumerate(colnames):
+                value=result[i]
+                admin[colName]=value
+        return admin
+        
+        
+adminsDAO = AdminsDAO()
