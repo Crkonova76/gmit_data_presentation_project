@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>miso index</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -45,9 +46,10 @@
     </div>
 
     <div id="display">
-        <h2> Registration</h2>
+        <h2> Registration<a href="/logout">Logout</a></h2>
         <button onclick="showCreate()">Create</button>
-        <button id="log-out-button" onclick="doLogOut()">Log Out</button>
+        
+
         <table id="kidsTable" class="table">
             <tr>
                 <th>registration</th><th>name</th><th>surname</th><th>team</th>
@@ -73,7 +75,7 @@
             function showCreate(){
                 document.getElementById('display').style.display="none"
                 document.getElementById('update-button').style.display="none"
-                document.getElementById('create-edit-button').style.display="block"
+                document.getElementById('create-edit-button').style.display="none"
                 document.getElementById('create-edit').style.display="block"
 
             }
@@ -122,28 +124,6 @@
                 
                 
             }
-
-            function doLogOut(){
-                $.ajax({
-                    url:'/logout',
-                    // data:JSON.stringify(kid),
-                    method:'GET',
-                    // datatype:'JSON',
-                    contentType:"application/json;charset=utf-8",
-                    success:function(result){
-                        console.log(result)
-                        // add_kid_to_table(kid)
-                        // showDisplay()
-                        // clearForm()
-                   },
-                   error:function(xhr,status,error){
-                        console.log("error"+error)
-                   }
-                })
-                
-                // showDisplay()
-            }
-
             function doCreate(){
                 console.log("in do create")
                 kid=getKidFromForm()
@@ -167,13 +147,13 @@
                 showDisplay()
 
             }
-
+            
             function doUpdate(){
                 kid=getKidFromForm()
-                updateServer(kid)
-                
+                updateServer(kid)            
 
             }
+
             function updateServer(kid){
                 $.ajax({
                     url: "/kids/"+kid.registration,
