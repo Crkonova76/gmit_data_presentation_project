@@ -14,10 +14,10 @@ db = mysql.connector.connect(
 # cursor=db.cursor()
 # cursor.execute("CREATE DATABASE competition")
 
-# #create table called kids
-# cursor=db.cursor()
-# sql="CREATE TABLE kids (registration INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR (30),surname VARCHAR(30),team VARCHAR(30),emergencyContactName VARCHAR (30),phoneNumber INT)"
-# cursor.execute(sql)
+#create table called kids
+cursor=db.cursor()
+sql="CREATE TABLE kids (registration INT AUTO_INCREMENT PRIMARY KEY,name VARCHAR (30),surname VARCHAR(30),belt VARCHAR(30),status ENUM('Active','Inactive')DEFAULT 'ACTIVE',phoneNumber INT)"
+cursor.execute(sql)
 
 #create table called admins
 cursor=db.cursor()
@@ -26,8 +26,8 @@ cursor.execute(sql)
 
 # #Create records
 # cursor=db.cursor()
-# sql="insert into kids (name, surname,team,emergencyContactName,phoneNumber) values (%s,%s,%s,%s,%s)"
-# values=("Oliver","Crkon","Limerick","Michal", "0872736491")
+# sql="insert into kids (name, surname,belt,status,phoneNumber) values (%s,%s,%s,%s,%s)"
+# values=("Oliver","Crkon","blue","Active", "0872736491")
 # cursor.execute(sql,values)
 # db.commit()
 # print(cursor.lastrowid)

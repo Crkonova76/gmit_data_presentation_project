@@ -15,12 +15,12 @@ class KidsDAO:
 
     def create(self, kid):
         cursor = self.db.cursor()
-        sql = "insert into kids (name, surname,team,emergencyContactName,phoneNumber) values (%s,%s,%s,%s,%s)"
+        sql = "insert into kids (name, surname,belt,status,phoneNumber) values (%s,%s,%s,%s,%s)"
         values = [
             kid["name"],
             kid["surname"],
-            kid["team"],
-            kid["emergencyContactName"],
+            kid["belt"],
+            kid["status"],
             kid["phoneNumber"]
         ]
 
@@ -52,12 +52,12 @@ class KidsDAO:
 
     def update(self, kid):       
         cursor = self.db.cursor()
-        sql = "update kids set name=%s,surname=%s,team=%s,emergencyContactName=%s,phoneNumber=%s where registration = %s"
+        sql = "update kids set name=%s,surname=%s,belt=%s,status=%s,phoneNumber=%s where registration = %s"
         values = [            
             kid["name"],
             kid["surname"],
-            kid["team"],
-            kid["emergencyContactName"],
+            kid["belt"],
+            kid["status"],
             kid["phoneNumber"],
             kid["registration"]
         ]
@@ -75,7 +75,7 @@ class KidsDAO:
         #print("delete completed")
 
     def convertToDict(self,result):
-        colnames=['registration','name','surname','team','emergencyContactName','phoneNumber']
+        colnames=['registration','name','surname','belt','status','phoneNumber']
         kid = {}
 
         if result:
@@ -112,10 +112,13 @@ class AdminsDAO:
 
     def deleteAdmin(self, id):
         cursor = self.db.cursor()
-        sql = "delete from admins where id = %s"
-        values = [id]
-        cursor.execute(sql, values)
-        return{}
+        if id == False:
+            return {}
+        else:
+            sql = "delete from admins where id = %s"
+            values = [id]
+            cursor.execute(sql, values)
+            return{}
         
         
     def deleteAll(self):

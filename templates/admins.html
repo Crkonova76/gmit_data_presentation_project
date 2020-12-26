@@ -1,10 +1,4 @@
-<style>	
-    body {
-    font-family: Arial;
-    background-color: #a1d0f0;
-    padding: 500px;
-    }
-</style>
+
 <html>
     <head>
         <title>Administration page</title>
@@ -13,10 +7,113 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
+    <style>	
+        body {
+        font-family: Arial;
+        background-color: #bbd7e9;
+        padding: 50px;
+        }
+   
+        .data-screen {
+        background-color: #FFF;
+        padding: 20px;
+        border-radius: 5px
+        }
+        
+        .application-title {
+        text-align: center;
+        color: rgb(14, 13, 13);
+        }
+        
+        .login-form {
+        text-align: center;
+        }
+        .control-group {
+        margin-bottom: 10px;
+        }
+        
+        input {
+        text-align: center;
+        background-color: #ECF0F1;
+        border: 2px solid transparent;
+        border-radius: 3px;
+        font-size: 16px;
+        font-weight: 200;
+        padding: 10px 0;
+        width: 250px;
+        transition: border .5s;
+        }  
+    
+        .btn {
+        display:inline-block;
+        border: 2px solid transparent;
+        background: #3498DB;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        width: 220px;
+        margin: 0 auto;
+        }
+        .btn_create, .btn_update {
+        display:block;
+        border: 2px solid transparent;
+        background: #3498DB;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        width: 220px;
+        margin: 0 auto;
+        }
+        .btn_cancel {
+        display:block;
+        border: 2px solid transparent;
+        background: #d8381c;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        width: 220px;
+        margin: 0 auto;
+        }
+        .btn_delete {
+        display:block;
+        border: 2px solid transparent;
+        background: #ee9c32;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        width: 220px;
+        margin: 0 auto;
+        }
+    </style>
 
 <body>
-    <div id="create-edit" style="display:none">
-        <h2>create-edit</h2>
+    <div class="application-title" id="create-edit" style="display:none">
+        <h1>Create a New Administrator</h1>
+        <div class="data-screen">
         <table id="createUpdateForm">
             <tr>
                 <td>id</td>
@@ -32,17 +129,25 @@
             </tr>
             <tr>
                 <td>
-                    <button id="create-button" onclick="doCreate()">Create</button>
-                    <button id="update-button" onclick="doUpdate()">Update</button>
+                    <button class="btn_create" id="create-button" onclick="doCreate()">Create</button><br>
+                    <button class="btn_update" id="update-button" onclick="doUpdate()">Update</button><br>
+                    <button class="btn_cancel" onclick="window.location='/administrators'">Cancel</button></br>
                 </td>
             </tr>
         </table>
-
+    </div>
     </div>
 
+    <div class="application-title">
     <div id="display">
-        <h2> Administration</h2>
-        <button onclick="showCreate()">Create New User</button>
+        <h1> System Administrators</h1>
+        <h4> Super user cannot be deleted.</h4>
+        <h4> User cannot delete themselves</h4>
+        <div class="data-screen">
+        <button class="btn" onclick="showCreate()">Create a New Admin</button>
+        <button class="btn" onclick="window.location='/home'">Go to Home Section</button>
+        <button class="btn" onclick="window.location='/membership'">Go to Membership Section</button>
+        <button class="btn" onclick="window.location='/logout'">Log Out from the System</button></br></br>
         <table id="adminsTable" class="table">
             <tr>
                 <th>id</th><th>User Name</th><th>Password</th><th></th>
@@ -50,8 +155,11 @@
             </tr>            
 
         </table>
-
     </div>
+</div>
+    </div>  
+        
+
 
     <script>
             
@@ -168,15 +276,10 @@
                 cell1.innerHTML=admin.id
                 cell2=rowElem.insertCell(1)
                 cell2.innerHTML=admin.UserName
-                cell3=rowElem.insertCell(2)
-                if(admin.id == 37){
-                    cell3.innerHTML='**************'
-                }
-                else{
-                    cell3.innerHTML=admin.Password
-                }
+                cell3=rowElem.insertCell(2)                
+                cell3.innerHTML='**************'               
                 cell4=rowElem.insertCell(3)
-                cell4.innerHTML='<button onclick="doDelete(this)">Delete</button>'
+                cell4.innerHTML='<button class="btn_delete" onclick="doDelete(this)">Delete</button>'
             }               
             populateTable()
 			
@@ -204,4 +307,5 @@
                 } 
             }
     </script>
-</body>
+        </body>
+        </html>

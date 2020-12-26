@@ -1,81 +1,199 @@
 <html>
     <head>
-        <title>miso index</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
+    <style>	
+        body {
+        font-family: Arial;
+        background-color: #bbd7e9;
+        padding: 50px;
+        }
+   
+        .data-screen {
+        background-color: #FFF;
+        padding: 20px;
+        border-radius: 5px
+        }
+        
+        .application-title {
+        text-align: center;
+        color: rgb(14, 13, 13);
+        }
+        
+        .login-form {
+        text-align: center;
+        }
+        .control-group {
+        margin-bottom: 10px;
+        }
+        
+        input {
+        text-align: center;
+        background-color: #ECF0F1;
+        border: 2px solid transparent;
+        border-radius: 3px;
+        font-size: 16px;
+        font-weight: 200;
+        padding: 10px 0;
+        width: 250px;
+        transition: border .5s;
+        }
+        .btn_logout, .btn_new_member, .btn_home{
+        display:inline-block;
+        border: 2px solid transparent;
+        background: #3498DB;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        width: 220px;
+        margin: 0 auto;
+        } 
+    
+        .btn {
+        border: 2px solid transparent;
+        background: #3498DB;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        display: block;
+        width: 220px;
+        margin: 0 auto;
+        }
+        .btn_create, .btn_update {
+        display:block;
+        border: 2px solid transparent;
+        background: #3498DB;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        width: 220px;
+        margin: 0 auto;
+        }
+        .btn_cancel {
+        display:block;
+        border: 2px solid transparent;
+        background: #d8381c;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        width: 220px;
+        margin: 0 auto;
+        }
+        .btn_delete {
+        display:block;
+        border: 2px solid transparent;
+        background: #ee9c32;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        width: 220px;
+        margin: 0 auto;
+        }
+    </style>
 
 <body>
-    <div id="create-edit" style="display:none">
-        <h2>create-edit</h2>
+    <div class="application-title" id="create-edit" style="display:none">
+        
+        <h1>Create a New Member</h1>
+		<div class="data-screen">
         <table id="createUpdateForm">
             <tr>
-                <td>registration</td>
+                <td>Registration</td>
                 <td><input type="text" name="registration" id="idInput"></td>
             </tr>
             <tr>
-                <td>name</td>
+                <td>Name</td>
                 <td><input type="text" name="name"></td>
             </tr>
             <tr>
-                <td>surname</td>
+                <td>Surname</td>
                 <td><input type="text" name="surname"></td>
             </tr>
             <tr>
-                <td>team</td>
-                <td><input type="text" name="team"></td>
+                <td>Belt</td>
+                <td><input type="text" name="belt"></td>
             </tr>
             <tr>
-                <td>Emergency Contact Name</td>
-                <td><input type="text" name="emergencyContactName"></td>
+                
+                <td>Status</td>
+                <td><input type="text" name="status" ></td>
             </tr>
             <tr>
-                <td>phoneNumber</td>
+                <td>Phone Number</td>
                 <td><input type="text" name="phoneNumber"></td>
             </tr>
             <tr>
                 <td></td><td>
-                    <button id="create-edit-button" onclick="doCreate()">Create</button>
-                    <button id="update-button" onclick="doUpdate()">Update</button>
+                    <button class="btn_create" id="create-edit-button" class="btn_create" onclick="doCreate()">Create</button></br>
+                    <button class="btn_update" id="update-button" class="btn" onclick="doUpdate()">Update</button></br>
+                    <button class="btn_cancel" onclick="window.location='/membership'">Cancel</button></br>
+
                 </td>
             </tr>
         </table>
-
     </div>
+</div>
 
-    <div id="display">
-        <h2> Registration<a href="/logout">Logout</a></h2>
-        <button onclick="showCreate()">Create</button>
-        
-
+    <div class="application-title" id="display">
+        <h1> Membership Section</h1>
+        <div class="data-screen">
+        <button class="btn_new_member" onclick="showCreate()">Create a New Member</button>
+        <button class="btn_home" onclick="window.location='/home'">Go to Home Section</button>
+        <button class="btn_home" onclick="window.location='/administrators'">Go to Admin Section</button>
+        <button class="btn_logout" onclick="window.location='/logout'">Log Out from the System</button></br></br>
         <table id="kidsTable" class="table">
             <tr>
-                <th>registration</th><th>name</th><th>surname</th><th>team</th>
-                <th>Emergency Contact Name</th><th>Phone Number</th><th></th><th></th>
+                <th>Registration</th><th>Name</th><th>Surname</th><th>Belt</th>
+                <th>Status</th><th>Phone Number</th><th></th><th></th>
 
             </tr>
             <tr id="1">
-                <td>1</td>
-                <td>Oliver</td>
-                <td>Crkon</td>
-                <td>Limerick</td>
-                <td>Mata</td>
-                <td>1236</td>
-                <td><button onclick="showUpdate(this)">Update</button></td>
-                <td><button onclick="doDelete(this)">Delete</button></td>
+             
             </tr>
 
         </table>
 
     </div>
+</div>
     <script>
             
             function showCreate(){
                 document.getElementById('display').style.display="none"
                 document.getElementById('update-button').style.display="none"
-                document.getElementById('create-edit-button').style.display="none"
+                document.getElementById('create-edit-button').style.display="block"
                 document.getElementById('create-edit').style.display="block"
 
             }
@@ -102,8 +220,8 @@
                 kid.registration = rowElement.getAttribute("id");
                 kid.name=rowElement.cells[1].firstChild.textContent
                 kid.surname=rowElement.cells[2].firstChild.textContent
-                kid.team=rowElement.cells[3].firstChild.textContent
-                kid.emergencyContactName=rowElement.cells[4].firstChild.textContent
+                kid.belt=rowElement.cells[3].firstChild.textContent
+                kid.status=rowElement.cells[4].firstChild.textContent
                 kid.phoneNumber=rowElement.cells[5].firstChild.textContent
                
                 return kid
@@ -118,12 +236,13 @@
                 kid.registration=form.querySelector('input[name="registration"]').disabled=true
                 form.querySelector('input[name="name"]').value=kid.name
                 form.querySelector('input[name="surname"]').value=kid.surname
-                form.querySelector('input[name="team"]').value= kid.team
-                form.querySelector('input[name="emergencyContactName"]').value= kid.emergencyContactName
+                form.querySelector('input[name="belt"]').value= kid.belt
+                form.querySelector('input[name="status"]').value= kid.status                
                 form.querySelector('input[name="phoneNumber"]').value= kid.phoneNumber
                 
                 
-            }
+            }            
+
             function doCreate(){
                 console.log("in do create")
                 kid=getKidFromForm()
@@ -147,13 +266,13 @@
                 showDisplay()
 
             }
-            
+
             function doUpdate(){
                 kid=getKidFromForm()
-                updateServer(kid)            
+                updateServer(kid)
+                
 
             }
-
             function updateServer(kid){
                 $.ajax({
                     url: "/kids/"+kid.registration,
@@ -199,24 +318,39 @@
                 rowElement = document.getElementById(kid.registration)
                 rowElement.cells[1].firstChild.textContent = kid.name
                 rowElement.cells[2].firstChild.textContent = kid.surname
-                rowElement.cells[3].firstChild.textContent = kid.team
-                rowElement.cells[4].firstChild.textContent = kid.emergencyContactName
+                rowElement.cells[3].firstChild.textContent = kid.belt
+                rowElement.cells[4].firstChild.textContent = kid.status
                 rowElement.cells[5].firstChild.textContent = kid.phoneNumber
 
-
-                //console.log("updating table")
             }
             function getKidFromForm(){
                 var form=document.getElementById("createUpdateForm")
 
                 var kid={}
                 kid.registration=form.querySelector('input[name="registration"]').value
-                kid.name=form.querySelector('input[name="name"]').value
-                kid.surname=form.querySelector('input[name="surname"]').value
-                kid.team=form.querySelector('input[name="team"]').value
-                kid.emergencyContactName=form.querySelector('input[name="emergencyContactName"]').value
+                kid.name=form.querySelector('input[name="name"]').value            
+                kid.surname=form.querySelector('input[name="surname"]').value             
+                kid.belt=form.querySelector('input[name="belt"]').value
+                if (kid.belt == null || kid.belt == ""){
+                    kid.belt = 'white'
+                }
+                kid.status=form.querySelector('input[name="status"]').value
+                if(kid.status !== 'Active' || kid.status !== 'Inactive'){                    
+                    kid.status='Active'
+                }
                 kid.phoneNumber=form.querySelector('input[name="phoneNumber"]').value
-                //console.log(kid)
+                if((isNaN(kid.phoneNumber) == true)){   
+                    alert("Invalid phone number. Phone number 1234567890 will be applied!");                 
+                    kid.phoneNumber=1234567890
+                }
+                if(kid.phoneNumber == null || kid.phoneNumber == ""){   
+                    alert("Empty phone number field. Phone number 0987654321 will be applied!");                 
+                    kid.phoneNumber=0987654321
+                }
+                if ((kid.name == null || kid.name == "") || (kid.surname == null || kid.surname == "")){
+                    alert("Name and surname are mandatory fields!");
+                    return False
+                }
 
                 return kid
             }
@@ -253,8 +387,8 @@
 
                 form.querySelector('input[name="name"]').value = ''
                 form.querySelector('input[name="surname"]').value = ''
-                form.querySelector('input[name="team"]').value = ''
-                form.querySelector('input[name="emergencyContactName"]').value = ''
+                form.querySelector('input[name="belt"]').value = ''
+                form.querySelector('input[name="status"]').value = ''
                 form.querySelector('input[name="phoneNumber"]').value = ''
             }
 
@@ -270,15 +404,15 @@
                 cell3=rowElem.insertCell(2)
                 cell3.innerHTML=kid.surname
                 cell4=rowElem.insertCell(3)
-                cell4.innerHTML=kid.team
+                cell4.innerHTML=kid.belt
                 cell5=rowElem.insertCell(4)
-                cell5.innerHTML=kid.emergencyContactName
+                cell5.innerHTML=kid.status
                 cell6=rowElem.insertCell(5)
                 cell6.innerHTML=kid.phoneNumber
                 cell7=rowElem.insertCell(6)
-                cell7.innerHTML='<button onclick="showUpdate(this)">Update</button>'
+                cell7.innerHTML='<button class="btn" onclick="showUpdate(this)">Update</button>'
                 cell8=rowElem.insertCell(7)
-                cell8.innerHTML='<button onclick="doDelete(this)">Delete</button>'
+                cell8.innerHTML='<button class="btn_delete" onclick="doDelete(this)">Delete</button>'
             }               
             populateTable()
     </script>

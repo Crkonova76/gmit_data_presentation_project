@@ -4,13 +4,9 @@ from project_database import kidsDAO
 from project_database import adminsDAO
 import os
 
-app = Flask(__name__, static_url_path='', static_folder='staticpages')
+# app = Flask(__name__, static_url_path='', static_folder='staticpages')
+app = Flask(__name__, static_url_path='')
 
-#app = Flask(__name__)
-
-# @app.route('/')
-# def index():
-#    return "Hmatattaorld!"
 
 @app.route('/',  methods=['GET'])
 def home():
@@ -18,32 +14,56 @@ def home():
     if not session.get('logged_in'):
         return render_template('login.html')
     else:
-        return competitors()
+        return home_page()
 
-@app.route('/competitors', methods=['POST', 'GET'])
-def competitors():
+@app.route('/membership',  methods=['GET'])
+def membership():
+    print(session.get('logged_in'))
     if not session.get('logged_in'):
-        # return render_template('login.html')
+        return render_template('login.html')
+    else:
+        return render_template('membership.html')
+
+@app.route('/administrators',  methods=['GET'])
+def admins():
+    print(session.get('logged_in'))
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        return render_template('admins.html')
+
+@app.route('/home', methods=['POST', 'GET'])
+def home_page():
+    if not session.get('logged_in'):
         return home()
     else:
-        return render_template('index.html')      
+        return render_template('home.html')     
+
+def get_users():
+    return adminsDAO.getAllAdmins() 
+
+
+def current_user(username, password):
+    users = get_users()
+    for i in range(len(users)):
+        if users[i]['UserName'] == username:
+            if users[i]['Password'] == password:      
+                session['user_id'] = users[i]['id']
+                session['user_name'] = username
+                return True
 
 @app.route('/login', methods=['POST'])
 def do_admin_login():
     login = request.form
     userName = login['username']
     password = login['password']
- 
-    if userName == 'password' and password=='admin':
+    access = current_user(userName, password)
+    
+    if access:
         session['logged_in'] = True
-        session['username'] = 'username'
-        session['password'] = 'admin'
-        print(f"username {session['username']}")
-        print(f"password {session['password']}")
     else:
         flash('wrong password!') 
-        session['logged_in'] = False
-           
+        session['logged_in'] = False           
     return home()
 
 @app.route('/logout')
@@ -58,12 +78,11 @@ def getAll():
 
 #curl " Http://127.0.0.1:5000/kids/2"
 @app.route('/kids/<int:registration>')
-def findById(registration):
-    
+def findById(registration):    
     return jsonify(kidsDAO.findByID(registration))
 
 
-# curl  -i -H "Content-Type:application/json" -X POST -d "{\"registration\":2,\"name\":\"Zuza\",\"surname\":\"Marchevka\",\"team\":\"Kosice\",\"emergencyContactName\":\"Jano\",\"phoneNumber\":\"5689\"}" http://127.0.0.1:5000/kids
+# curl  -i -H "Content-Type:application/json" -X POST -d "{\"registration\":2,\"name\":\"Zuza\",\"surname\":\"Marchevka\",\"belt\":\"Kosice\",\"status\":\"Jano\",\"Inactive\":\"5689\"}" http://127.0.0.1:5000/kids
 @app.route('/kids', methods=['POST'])
 def create():
     
@@ -74,8 +93,8 @@ def create():
         "registration":request.json["registration"],
         "name":request.json["name"],
         "surname":request.json["surname"],
-        "team":request.json["team"],
-        "emergencyContactName":request.json["emergencyContactName"],
+        "belt":request.json["belt"],
+        "status":request.json["status"],
         "phoneNumber":request.json["phoneNumber"]
     }
     
@@ -94,10 +113,10 @@ def update(registration):
         found_kid['name'] = request.json['name']
     if 'surname' in request.json:
         found_kid['surname'] = request.json['surname']
-    if 'team' in request.json:
-        found_kid['team'] = request.json['team']
-    if 'emergencyContactName' in request.json:
-        found_kid['emergencyContactName'] = request.json['emergencyContactName']
+    if 'belt' in request.json:
+        found_kid['belt'] = request.json['belt']
+    if 'status' in request.json:
+        found_kid['status'] = request.json['status']
     if 'phoneNumber' in request.json:
         found_kid['phoneNumber'] = request.json['phoneNumber']
     
@@ -142,8 +161,11 @@ def createAdmin():
 # curl -i -H "Content-Type:application/json" -X DELETE http://127.0.0.1:5000/admins/8
 @app.route('/admins/<int:id>' , methods=['DELETE'])
 def deleteAdmin(id):
-    adminsDAO.deleteAdmin(id)
-    return jsonify(adminsDAO.deleteAdmin(id))
+    if session['user_id']==id:
+        return jsonify({}),400
+    else:
+        adminsDAO.deleteAdmin(id)
+        return jsonify(adminsDAO.deleteAdmin(id))
 
 # curl -i -H "Content-Type:application/json" -X DELETE http://127.0.0.1:5000/admins
 @app.route('/admins' , methods=['DELETE'])
