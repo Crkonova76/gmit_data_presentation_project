@@ -1,7 +1,13 @@
-<style>	
+	/* * {
+    box-sizing: border-box;
+    }
+    
+    *:focus {
+    outline: none;
+    } */
     body {
     font-family: Arial;
-    background-color: #a1d0f0;
+    background-color: #3498DB;
     padding: 50px;
     }
     .login {
@@ -14,9 +20,9 @@
     border-radius: 5px
     }
     
-    .application-title {
+    .app-title {
     text-align: center;
-    color: rgb(14, 13, 13);
+    color: #777;
     }
     
     .login-form {
@@ -36,8 +42,13 @@
     padding: 10px 0;
     width: 250px;
     transition: border .5s;
-    }  
-
+    }
+    
+    input:focus {
+    border: 2px solid #3498DB;
+    box-shadow: none;
+    }
+    
     .btn {
     border: 2px solid transparent;
     background: #3498DB;
@@ -54,33 +65,14 @@
     width: 250px;
     margin: 0 auto;
     }
-</style>
-<html>
-
-<head>
-    <!-- <link rel="stylesheet" type="text/css" href="/styles.css"/> -->
-</head>
-<body>
-<form action="/login" method="POST">
-<div class="login">
-<div class="login-screen">
-<div class="application-title">
-    <h1>Limerick BJJ Academy</h1>
-    <h2>Administration Login</h2>
-</div>
-<div class="login-form">
-<div class="control-group">
-				<input type="text" class="login-field" value="" placeholder="Username" name="username">
-<label class="login-field-icon" for="login-name"></label></div>
-<div class="control-group">
-				<input type="password" class="login-field" value="" placeholder="Password" name="password">
-<label class="login-field-icon" for="login-pass"></label></div>
-<input type="submit" value="Log in" class="btn">
-
-</div>
-</div>
-</div>
-</form>
-</body>
-
-</html>
+    
+    .btn:hover {
+    background-color: #2980B9;
+    }
+    
+    /* .login-link {
+    font-size: 12px;
+    color: #444;
+    display: block;
+    margin-top: 12px;
+    } */

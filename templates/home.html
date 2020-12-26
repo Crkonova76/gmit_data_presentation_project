@@ -1,0 +1,75 @@
+<html>
+    <head>            
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </head>
+    <style>	
+        body {
+        font-family: Arial;
+        background-color: #bbd7e9;
+        padding: 50px;
+        }
+   
+        .data-screen {
+        background-color: #FFF;
+        padding: 20px;
+        border-radius: 5px
+        }
+        
+        .application-title {
+        text-align: center;
+        color: rgb(14, 13, 13);
+        }
+        
+        .login-form {
+        text-align: center;
+        }
+        .control-group {
+        margin-bottom: 10px;
+        }
+        
+        input {
+        text-align: center;
+        background-color: #ECF0F1;
+        border: 2px solid transparent;
+        border-radius: 3px;
+        font-size: 16px;
+        font-weight: 200;
+        padding: 10px 0;
+        width: 250px;
+        transition: border .5s;
+        }  
+    
+        .btn {
+        border: 2px solid transparent;
+        background: #3498DB;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 25px;
+        padding: 10px 0;
+        text-decoration: none;
+        text-shadow: none;
+        border-radius: 3px;
+        box-shadow: none;
+        transition: 0.25s;
+        display: block;
+        width: 220px;
+        margin: 0 auto;
+        }
+    </style>
+
+<body>  
+
+    <div class="application-title" id="display">
+        <h1> Administration section</h1>
+        <div class="data-screen">
+        <button class="btn" onclick="window.location='/membership'">Go to Membership Section</button></br>
+        <button class="btn" onclick="window.location='/administrators'">Go to Admin Section</button></br>
+        <button class="btn" onclick="window.location='/logout'">Log Out from the System</button></br>
+        
+    </div>
+</div>
+   
+</body>
+
+</html>

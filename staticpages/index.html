@@ -1,4 +1,4 @@
-<html>
+<!-- <html>
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             
@@ -11,27 +11,32 @@
         <h2>create-edit</h2>
         <table id="createUpdateForm">
             <tr>
-                <td>registration</td>
+                <td>Registration</td>
                 <td><input type="text" name="registration" id="idInput"></td>
             </tr>
             <tr>
-                <td>name</td>
+                <td>Name</td>
                 <td><input type="text" name="name"></td>
             </tr>
             <tr>
-                <td>surname</td>
+                <td>Surname</td>
                 <td><input type="text" name="surname"></td>
             </tr>
             <tr>
-                <td>team</td>
-                <td><input type="text" name="team"></td>
+                <td>Belt</td>
+                <td><input type="text" name="belt"></td>
             </tr>
             <tr>
-                <td>Emergency Contact Name</td>
-                <td><input type="text" name="emergencyContactName"></td>
+                
+                <td>Status</td>
+                <td><select input list ="status" name="status" >
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                 </select>
+                </td>
             </tr>
             <tr>
-                <td>phoneNumber</td>
+                <td>Phone Number</td>
                 <td><input type="text" name="phoneNumber"></td>
             </tr>
             <tr>
@@ -50,19 +55,12 @@
         <button id="log-out-button" onclick="doLogOut()">Log Out</button>
         <table id="kidsTable" class="table">
             <tr>
-                <th>registration</th><th>name</th><th>surname</th><th>team</th>
-                <th>Emergency Contact Name</th><th>Phone Number</th><th></th><th></th>
+                <th>Registration</th><th>Name</th><th>Surname</th><th>Belt</th>
+                <th>Status</th><th>Phone Number</th><th></th><th></th>
 
             </tr>
             <tr id="1">
-                <td>1</td>
-                <td>Oliver</td>
-                <td>Crkon</td>
-                <td>Limerick</td>
-                <td>Mata</td>
-                <td>1236</td>
-                <td><button onclick="showUpdate(this)">Update</button></td>
-                <td><button onclick="doDelete(this)">Delete</button></td>
+             
             </tr>
 
         </table>
@@ -100,8 +98,8 @@
                 kid.registration = rowElement.getAttribute("id");
                 kid.name=rowElement.cells[1].firstChild.textContent
                 kid.surname=rowElement.cells[2].firstChild.textContent
-                kid.team=rowElement.cells[3].firstChild.textContent
-                kid.emergencyContactName=rowElement.cells[4].firstChild.textContent
+                kid.belt=rowElement.cells[3].firstChild.textContent
+                kid.status=rowElement.cells[4].firstChild.textContent
                 kid.phoneNumber=rowElement.cells[5].firstChild.textContent
                
                 return kid
@@ -116,8 +114,8 @@
                 kid.registration=form.querySelector('input[name="registration"]').disabled=true
                 form.querySelector('input[name="name"]').value=kid.name
                 form.querySelector('input[name="surname"]').value=kid.surname
-                form.querySelector('input[name="team"]').value= kid.team
-                form.querySelector('input[name="emergencyContactName"]').value= kid.emergencyContactName
+                form.querySelector('input[name="belt"]').value= kid.belt
+                form.querySelector('input[name="status"]').value= kid.status
                 form.querySelector('input[name="phoneNumber"]').value= kid.phoneNumber
                 
                 
@@ -219,8 +217,8 @@
                 rowElement = document.getElementById(kid.registration)
                 rowElement.cells[1].firstChild.textContent = kid.name
                 rowElement.cells[2].firstChild.textContent = kid.surname
-                rowElement.cells[3].firstChild.textContent = kid.team
-                rowElement.cells[4].firstChild.textContent = kid.emergencyContactName
+                rowElement.cells[3].firstChild.textContent = kid.belt
+                rowElement.cells[4].firstChild.textContent = kid.status
                 rowElement.cells[5].firstChild.textContent = kid.phoneNumber
 
 
@@ -233,8 +231,8 @@
                 kid.registration=form.querySelector('input[name="registration"]').value
                 kid.name=form.querySelector('input[name="name"]').value
                 kid.surname=form.querySelector('input[name="surname"]').value
-                kid.team=form.querySelector('input[name="team"]').value
-                kid.emergencyContactName=form.querySelector('input[name="emergencyContactName"]').value
+                kid.belt=form.querySelector('input[name="belt"]').value
+                kid.status=form.querySelector('input[name="status"]').value
                 kid.phoneNumber=form.querySelector('input[name="phoneNumber"]').value
                 //console.log(kid)
 
@@ -273,8 +271,8 @@
 
                 form.querySelector('input[name="name"]').value = ''
                 form.querySelector('input[name="surname"]').value = ''
-                form.querySelector('input[name="team"]').value = ''
-                form.querySelector('input[name="emergencyContactName"]').value = ''
+                form.querySelector('input[name="belt"]').value = ''
+                form.querySelector('input[name="status"]').value = ''
                 form.querySelector('input[name="phoneNumber"]').value = ''
             }
 
@@ -290,9 +288,9 @@
                 cell3=rowElem.insertCell(2)
                 cell3.innerHTML=kid.surname
                 cell4=rowElem.insertCell(3)
-                cell4.innerHTML=kid.team
+                cell4.innerHTML=kid.belt
                 cell5=rowElem.insertCell(4)
-                cell5.innerHTML=kid.emergencyContactName
+                cell5.innerHTML=kid.status
                 cell6=rowElem.insertCell(5)
                 cell6.innerHTML=kid.phoneNumber
                 cell7=rowElem.insertCell(6)
@@ -304,4 +302,4 @@
     </script>
 </body>
 
-</html>
+</html> -->
