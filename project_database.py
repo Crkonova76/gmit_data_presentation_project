@@ -35,7 +35,6 @@ class KidsDAO:
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []
-        #print(results)
         for result in results:
             resultAsDict= self.convertToDict(result)
             returnArray.append(resultAsDict)
@@ -71,8 +70,6 @@ class KidsDAO:
         values = [registration]
         cursor.execute(sql, values)
         return{}
-        #self.db.commit()
-        #print("delete completed")
 
     def convertToDict(self,result):
         colnames=['registration','name','surname','belt','status','phoneNumber']
@@ -82,6 +79,7 @@ class KidsDAO:
             for i,colName in enumerate(colnames):
                 value=result[i]
                 kid[colName]=value
+
         return kid
 
 kidsDAO = KidsDAO()
@@ -134,7 +132,6 @@ class AdminsDAO:
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []
-        #print(results)
         for result in results:
             resultAsDict= self.convertToDict(result)
             returnArray.append(resultAsDict)

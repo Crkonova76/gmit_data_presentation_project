@@ -4,7 +4,6 @@ from project_database import kidsDAO
 from project_database import adminsDAO
 import os
 
-# app = Flask(__name__, static_url_path='', static_folder='staticpages')
 app = Flask(__name__, static_url_path='')
 
 
@@ -88,7 +87,6 @@ def create():
     
     if not request.json:
         abort(400)
-    # other checking 
     kid = {
         "registration":request.json["registration"],
         "name":request.json["name"],
@@ -124,7 +122,6 @@ def update(registration):
     return jsonify(found_kid)
         
 
-    # return "in update for id "+str(registration)
 
 # curl -i -H "Content-Type:application/json" -X DELETE http://127.0.0.1:5000/kids/16
 @app.route('/kids/<int:registration>' , methods=['DELETE'])
@@ -148,7 +145,6 @@ def createAdmin():
     
     if not request.json:
         abort(400)
-    # other checking 
     admin = {
         "id":request.json["id"],
         "UserName":request.json["UserName"],
