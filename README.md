@@ -15,6 +15,8 @@ Sipmle application used by local BJJ (sport ) club to track the current kids mem
 
 The superuser access is created (userName -admin, password -superuser) which can not be deleted by anyone. The plan is to exclude superuser from admin page in he future.
 
+The phone number "987654321" is set up as default number if the number is not provided. All fileds in membership section needs to ne filled in except of registration, which is updated from the database based on the last entry registration number incremented by 1. 
+
 ### *Database*
 
 A database created named competition.

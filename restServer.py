@@ -1,4 +1,3 @@
-
 from flask import Flask, jsonify, url_for, request, abort, session, render_template, flash, redirect
 from project_database import kidsDAO
 from project_database import adminsDAO
